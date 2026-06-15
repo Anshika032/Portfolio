@@ -45,6 +45,31 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: var(--nav-h);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .hero-intro > *,
+        .hero-photo-frame,
+        .achievement-card,
+        .project-card,
+        .stat-card {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
       }
 
       body {
@@ -85,6 +110,12 @@
         background: rgba(245, 242, 236, 0.92);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(26, 60, 52, 0.08);
+        transition: box-shadow 0.3s ease, background 0.3s ease;
+      }
+
+      .site-header.scrolled {
+        background: rgba(245, 242, 236, 0.97);
+        box-shadow: 0 4px 24px rgba(26, 60, 52, 0.08);
       }
 
       .nav-inner {
@@ -302,6 +333,68 @@
         border: 3px solid #1a3c34;
         box-shadow: 0 16px 48px rgba(26, 60, 52, 0.18);
         background: var(--bg-card);
+        opacity: 0;
+        transform: scale(0.96);
+      }
+
+      .hero-ready .hero-photo-frame {
+        animation: heroPhotoIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards;
+      }
+
+      @keyframes heroPhotoIn {
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .hero-ready .hero-photo-frame {
+          animation: heroPhotoIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards,
+            heroFloat 6s ease-in-out 1.1s infinite;
+        }
+      }
+
+      @keyframes heroFloat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-4px) scale(1);
+        }
+      }
+
+      .hero-intro > * {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      .hero-ready .hero-intro > .hero-kicker {
+        animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+      }
+
+      .hero-ready .hero-intro > h1 {
+        animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+      }
+
+      .hero-ready .hero-intro > .hero-role {
+        animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+      }
+
+      .hero-ready .hero-intro > .hero-tagline {
+        animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
+      }
+
+      .hero-ready .hero-intro > .hero-ctas {
+        animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.36s forwards;
+      }
+
+      @keyframes heroIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .hero-photo {
@@ -388,6 +481,35 @@
         font-weight: 500;
         color: var(--color-body);
         box-shadow: 0 2px 12px rgba(26, 60, 52, 0.04);
+        opacity: 0;
+        transform: translateY(14px);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+
+      .hero-ready .achievement-card {
+        animation: heroIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .hero-ready .achievement-card:nth-child(1) {
+        animation-delay: 0.42s;
+      }
+
+      .hero-ready .achievement-card:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+
+      .hero-ready .achievement-card:nth-child(3) {
+        animation-delay: 0.58s;
+      }
+
+      .hero-ready .achievement-card:nth-child(4) {
+        animation-delay: 0.66s;
+      }
+
+      .achievement-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(26, 60, 52, 0.08);
+        border-color: rgba(201, 168, 76, 0.35);
       }
 
       .achievement-card strong {
@@ -423,12 +545,27 @@
       .btn-primary {
         background: var(--color-heading);
         color: #fefdf9;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(105deg, transparent 40%, rgba(201, 168, 76, 0.25) 50%, transparent 60%);
+        transform: translateX(-120%);
+        transition: transform 0.55s ease;
       }
 
       .btn-primary:hover {
         color: #fefdf9;
         transform: translateY(-2px);
         box-shadow: var(--shadow-hover);
+      }
+
+      .btn-primary:hover::after {
+        transform: translateX(120%);
       }
 
       .btn-outline {
@@ -462,6 +599,23 @@
         font-weight: 600;
         letter-spacing: -0.02em;
         color: var(--color-heading);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-head h2::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 3px;
+        background: var(--color-accent);
+        margin-top: 0.4rem;
+        border-radius: 2px;
+        transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .reveal.visible .section-head h2::after {
+        width: 48px;
       }
 
       .section-head p {
@@ -474,7 +628,7 @@
       .reveal {
         opacity: 0;
         transform: translateY(28px);
-        transition: opacity 0.65s ease, transform 0.65s ease;
+        transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
       .reveal.visible {
@@ -513,6 +667,33 @@
         padding: 1.35rem 1.5rem;
         border: 1px solid rgba(26, 60, 52, 0.08);
         box-shadow: 0 4px 24px rgba(26, 60, 52, 0.06);
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+
+      .reveal.visible .stat-card {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal.visible .stat-card:nth-child(1) {
+        transition-delay: 0.08s;
+      }
+
+      .reveal.visible .stat-card:nth-child(2) {
+        transition-delay: 0.16s;
+      }
+
+      .reveal.visible .stat-card:nth-child(3) {
+        transition-delay: 0.24s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 28px rgba(26, 60, 52, 0.1);
+        border-color: rgba(201, 168, 76, 0.3);
       }
 
       .stat-card .num {
@@ -562,6 +743,17 @@
         background: var(--badge-bg);
         border-radius: 999px;
         border: 1px solid rgba(26, 60, 52, 0.06);
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .pill:hover {
+        transform: translateY(-1px);
+        border-color: rgba(201, 168, 76, 0.45);
+        background: rgba(232, 240, 238, 0.9);
+      }
+
+      .project-card:hover .pill {
+        border-color: rgba(74, 124, 111, 0.2);
       }
 
       .pill.tech {
@@ -593,15 +785,65 @@
         background: var(--bg-card);
         border-radius: var(--radius);
         border: 1px solid rgba(26, 60, 52, 0.08);
+        border-left: 3px solid transparent;
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+
+      .reveal.visible .project-card {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal.visible .project-card:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+
+      .reveal.visible .project-card:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+
+      .reveal.visible .project-card:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+
+      .reveal.visible .project-card:nth-child(4) {
+        transition-delay: 0.2s;
+      }
+
+      .reveal.visible .project-card:nth-child(5) {
+        transition-delay: 0.25s;
+      }
+
+      .reveal.visible .project-card:nth-child(6) {
+        transition-delay: 0.3s;
+      }
+
+      .reveal.visible .project-card:nth-child(7) {
+        transition-delay: 0.35s;
+      }
+
+      .reveal.visible .project-card:nth-child(8) {
+        transition-delay: 0.4s;
+      }
+
+      .reveal.visible .project-card:nth-child(9) {
+        transition-delay: 0.45s;
+      }
+
+      .project-card.featured {
+        border-top: 2px solid rgba(201, 168, 76, 0.45);
       }
 
       .project-card:hover {
         transform: translateY(-6px);
         box-shadow: var(--shadow-hover);
+        border-left-color: var(--color-accent);
       }
 
       .project-card .date {
@@ -634,6 +876,9 @@
 
       .btn-project {
         align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
         padding: 0.55rem 1.1rem;
         font-size: 0.8rem;
         font-weight: 600;
@@ -643,12 +888,23 @@
         border: none;
         cursor: pointer;
         font-family: var(--font);
-        transition: background 0.2s ease;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
       }
 
       .btn-project:hover {
         background: rgba(201, 168, 76, 0.35);
         color: var(--color-heading);
+        transform: translateX(2px);
+      }
+
+      .btn-project .arrow {
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+
+      .btn-project:hover .arrow {
+        transform: translateX(4px);
       }
 
       /* Timeline */
@@ -683,13 +939,26 @@
         position: absolute;
         left: -1.5rem;
         top: 0.35rem;
-        transform: translateX(-50%);
+        transform: translateX(-50%) scale(0);
         width: 14px;
         height: 14px;
         background: var(--bg-card);
         border: 3px solid var(--color-accent);
         border-radius: 50%;
         margin-left: 1.5px;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .reveal.visible .timeline-item::before {
+        transform: translateX(-50%) scale(1);
+      }
+
+      .reveal.visible .timeline-item:nth-child(1)::before {
+        transition-delay: 0.1s;
+      }
+
+      .reveal.visible .timeline-item:nth-child(2)::before {
+        transition-delay: 0.25s;
       }
 
       .timeline-item h3 {
@@ -846,6 +1115,14 @@
         border-radius: var(--radius-sm);
         background: var(--bg-card);
         color: var(--color-body);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        outline: none;
+        border-color: var(--color-secondary);
+        box-shadow: 0 0 0 3px rgba(74, 124, 111, 0.15);
       }
 
       .contact-form textarea {
@@ -866,10 +1143,15 @@
         color: var(--color-heading);
         font-weight: 500;
         margin-top: 0.5rem;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
       }
 
       .form-success.show {
         display: block;
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .social-row {
@@ -984,7 +1266,7 @@
     </header>
 
     <main id="top">
-      <section class="hero container reveal">
+      <section class="hero container">
         <div class="hero-layout">
           <div class="hero-intro">
             <p class="hero-kicker">Portfolio · 2026</p>
@@ -1052,15 +1334,15 @@
           </div>
           <div class="stat-cards">
             <div class="stat-card">
-              <div class="num">6+</div>
+              <div class="num" data-count="6" data-suffix="+">0+</div>
               <div class="label">Production AI systems shipped</div>
             </div>
             <div class="stat-card">
-              <div class="num">95%</div>
+              <div class="num" data-count="95" data-suffix="%">0%</div>
               <div class="label">Peak accuracy (edge ASL pipeline)</div>
             </div>
             <div class="stat-card">
-              <div class="num">87%+</div>
+              <div class="num" data-count="87" data-suffix="%+">0%+</div>
               <div class="label">Hazard classification (SatLink, 20K+ samples)</div>
             </div>
           </div>
@@ -1178,7 +1460,7 @@
           <p>Newest first — hardware, vision, and full-stack ML.</p>
         </div>
         <div class="project-grid">
-          <article class="project-card">
+          <article class="project-card featured">
             <span class="date">June 2026</span>
             <h3>PitWall — F1 Race Intelligence Platform</h3>
             <p>
@@ -1195,9 +1477,15 @@
               <span class="pill tech">Next.js</span>
               <span class="pill tech">Three.js</span>
             </div>
-            <button type="button" class="btn-project" data-project="PitWall">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/Interactive-F1-RACE-INTELLIGENCE"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
-          <article class="project-card">
+          <article class="project-card featured">
             <span class="date">June 2026</span>
             <h3>Flight-Sense-AI — Real-Time Anomaly Detection</h3>
             <p>
@@ -1213,7 +1501,13 @@
               <span class="pill tech">Supabase</span>
               <span class="pill tech">WebSockets</span>
             </div>
-            <button type="button" class="btn-project" data-project="Flight-Sense-AI">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/Flight-Sense-AI"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">April 2026</span>
@@ -1231,7 +1525,13 @@
               <span class="pill tech">GSM</span>
               <span class="pill tech">Twilio API</span>
             </div>
-            <button type="button" class="btn-project" data-project="SMART-GUARD">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/SMART-GUARD--IOT-Enabled-Helmet-System"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">April 2026</span>
@@ -1247,7 +1547,13 @@
               <span class="pill tech">NLP</span>
               <span class="pill tech">Streamlit</span>
             </div>
-            <button type="button" class="btn-project" data-project="AI Customer Support Agent">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/SHL-Assessment-Recommendation-System"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">Jan 2026</span>
@@ -1264,7 +1570,13 @@
               <span class="pill tech">Scikit-learn</span>
               <span class="pill tech">Edge AI</span>
             </div>
-            <button type="button" class="btn-project" data-project="SatLink">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/satlink-emergency-platform"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">Oct 2025</span>
@@ -1280,7 +1592,13 @@
               <span class="pill tech">WebSockets</span>
               <span class="pill tech">Edge AI</span>
             </div>
-            <button type="button" class="btn-project" data-project="Satellite Safety Dashboard">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/astrohealth-space-safety-dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">Sept 2025</span>
@@ -1296,7 +1614,13 @@
               <span class="pill tech">Raspberry Pi</span>
               <span class="pill tech">gTTS</span>
             </div>
-            <button type="button" class="btn-project" data-project="SignEase">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/signease-asl-sign-language-pi"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">Aug 2025</span>
@@ -1310,7 +1634,13 @@
               <span class="pill tech">MATLAB</span>
               <span class="pill tech">Math Modeling</span>
             </div>
-            <button type="button" class="btn-project" data-project="Satellite Orbit Calculator">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub Profile <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
           <article class="project-card">
             <span class="date">March 2025</span>
@@ -1326,7 +1656,13 @@
               <span class="pill tech">DeepFace</span>
               <span class="pill tech">Custom NSFW DL</span>
             </div>
-            <button type="button" class="btn-project" data-project="SafeGaze">View Project</button>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub Profile <span class="arrow" aria-hidden="true">→</span></a
+            >
           </article>
         </div>
       </section>
@@ -1542,6 +1878,56 @@
         window.addEventListener("scroll", setActive, { passive: true });
         setActive();
 
+        function onScrollHeader() {
+          header.classList.toggle("scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", onScrollHeader, { passive: true });
+        onScrollHeader();
+
+        document.querySelector(".hero")?.classList.add("hero-ready");
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function animateCounter(el) {
+          var target = parseInt(el.getAttribute("data-count"), 10);
+          var suffix = el.getAttribute("data-suffix") || "";
+          if (isNaN(target)) return;
+          if (reducedMotion) {
+            el.textContent = target + suffix;
+            return;
+          }
+          var start = 0;
+          var duration = 1200;
+          var startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var value = Math.round(start + (target - start) * eased);
+            el.textContent = value + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+
+        const statIo = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.querySelectorAll(".num[data-count]").forEach(function (num) {
+                if (num.dataset.counted) return;
+                num.dataset.counted = "1";
+                animateCounter(num);
+              });
+              statIo.unobserve(e.target);
+            });
+          },
+          { threshold: 0.35 }
+        );
+        document.querySelectorAll("#about .stat-cards").forEach(function (el) {
+          statIo.observe(el);
+        });
+
         const io = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (e) {
@@ -1552,13 +1938,6 @@
         );
         document.querySelectorAll(".reveal").forEach(function (el) {
           io.observe(el);
-        });
-
-        document.querySelectorAll(".btn-project").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            var name = btn.getAttribute("data-project");
-            window.open("https://github.com/Anshika032", "_blank", "noopener,noreferrer");
-          });
         });
 
         var cvLink = document.getElementById("cv-download");
