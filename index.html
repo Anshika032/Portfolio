@@ -1135,23 +1135,51 @@
         cursor: pointer;
       }
 
-      .form-success {
+      .contact-form button[type="submit"]:disabled {
+        opacity: 0.7;
+        cursor: wait;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .form-success,
+      .form-error {
         display: none;
-        padding: 1rem;
-        background: var(--badge-bg);
+        padding: 1rem 1.15rem;
         border-radius: var(--radius-sm);
-        color: var(--color-heading);
         font-weight: 500;
-        margin-top: 0.5rem;
+        margin-top: 0.75rem;
         opacity: 0;
         transform: translateY(8px);
         transition: opacity 0.35s ease, transform 0.35s ease;
       }
 
-      .form-success.show {
+      .form-success.show,
+      .form-error.show {
         display: block;
         opacity: 1;
         transform: translateY(0);
+      }
+
+      .form-success {
+        background: #e8f0ee;
+        color: var(--color-heading);
+        border: 1px solid rgba(26, 60, 52, 0.12);
+      }
+
+      .form-error {
+        background: #f8e8e4;
+        color: #6b2f24;
+        border: 1px solid rgba(107, 47, 36, 0.12);
+      }
+
+      .contact-honeypot {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        height: 0;
+        width: 0;
+        overflow: hidden;
       }
 
       .social-row {
@@ -1360,15 +1388,28 @@
             <span class="pill">Edge AI</span>
             <span class="pill">Computer Vision</span>
             <span class="pill">Model Deployment</span>
+            <span class="pill">Model Compression</span>
             <span class="pill">Model Quantization</span>
+            <span class="pill">Pruning</span>
             <span class="pill">Inference Optimization</span>
             <span class="pill">Embedded ML</span>
             <span class="pill">Deep Learning</span>
             <span class="pill">CNNs</span>
+            <span class="pill">Feature Engineering</span>
             <span class="pill">MLOps</span>
             <span class="pill">IoT Systems</span>
             <span class="pill">Real-Time Detection</span>
             <span class="pill">Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Domain knowledge</h3>
+          <div class="pills">
+            <span class="pill">Control Systems</span>
+            <span class="pill">Digital Signal Processing</span>
+            <span class="pill">Embedded Systems</span>
+            <span class="pill">Computer Networks</span>
+            <span class="pill">Transfer Function Modeling</span>
           </div>
         </div>
         <div class="skill-group">
@@ -1387,9 +1428,12 @@
           <div class="pills">
             <span class="pill">TensorFlow</span>
             <span class="pill">TensorFlow Lite</span>
+            <span class="pill">PyTorch</span>
+            <span class="pill">XGBoost</span>
             <span class="pill">Keras</span>
             <span class="pill">Scikit-learn</span>
             <span class="pill">OpenCV</span>
+            <span class="pill">MediaPipe</span>
             <span class="pill">NumPy</span>
             <span class="pill">Matplotlib</span>
             <span class="pill">Hugging Face Transformers</span>
@@ -1400,6 +1444,8 @@
           <div class="pills">
             <span class="pill">Raspberry Pi</span>
             <span class="pill">Arduino Uno</span>
+            <span class="pill">Camera Interfacing</span>
+            <span class="pill">Real-Time Embedded Inference</span>
             <span class="pill">MQTT</span>
             <span class="pill">WebSockets</span>
             <span class="pill">YOLO Detection</span>
@@ -1432,7 +1478,10 @@
             <span class="pill">Git</span>
             <span class="pill">GitHub</span>
             <span class="pill">VS Code</span>
+            <span class="pill">Linux</span>
             <span class="pill">Jupyter Notebook</span>
+            <span class="pill">Google Colab</span>
+            <span class="pill">Overleaf</span>
             <span class="pill">Streamlit</span>
             <span class="pill">LaTeX</span>
             <span class="pill">MS Office</span>
@@ -1443,8 +1492,12 @@
           <h3>Professional strengths</h3>
           <div class="pills">
             <span class="pill">Leadership</span>
+            <span class="pill">Team Management</span>
+            <span class="pill">Strategic Thinking</span>
+            <span class="pill">Cross-functional Coordination</span>
             <span class="pill">Mentoring</span>
             <span class="pill">Communication</span>
+            <span class="pill">Time Management</span>
             <span class="pill">Problem-Solving</span>
             <span class="pill">Adaptability</span>
             <span class="pill">Teamwork</span>
@@ -1708,20 +1761,32 @@
         <div class="cert-strip-wrap">
           <div class="cert-strip" role="list">
             <div class="cert-card" role="listitem">
-              Banasthali Vidyapith
-              <span>Drone Certification · Department of AI</span>
+              CeNSE, IISc
+              <span>Summer School on Semiconductor Technology</span>
+            </div>
+            <div class="cert-card" role="listitem">
+              IBM
+              <span>AI Fundamentals: Foundations for Understanding AI</span>
+            </div>
+            <div class="cert-card" role="listitem">
+              IEEE
+              <span>Student Member · Jun 2026 – Present</span>
+            </div>
+            <div class="cert-card" role="listitem">
+              Google Cloud — Data &amp; AI
+              <span>Building Data and AI Solutions · 365 Data Science · 100% · March 2026</span>
             </div>
             <div class="cert-card" role="listitem">
               Microsoft &amp; LinkedIn
-              <span>Career Essentials in Generative AI</span>
+              <span>Generative AI</span>
+            </div>
+            <div class="cert-card" role="listitem">
+              Banasthali Vidyapith
+              <span>Drone Technology / Drone Training Certificate</span>
             </div>
             <div class="cert-card" role="listitem">
               NASA ARSET
               <span>Applied Remote Sensing Training Program</span>
-            </div>
-            <div class="cert-card" role="listitem">
-              Google Cloud — Data &amp; AI
-              <span>365 Data Science · 100% · March 2026</span>
             </div>
             <div class="cert-card" role="listitem">
               MathWorks
@@ -1741,7 +1806,7 @@
         </div>
         <div class="edu-card">
           <h3>B.Tech — Electronics and Communication Engineering</h3>
-          <div class="meta">Banasthali Vidyapith, Jaipur · July 2023 – May 2027 · CGPA 7.25 / 10</div>
+          <div class="meta">Banasthali Vidyapith, Jaipur · July 2023 – May 2027 · CGPA 7.38 / 10</div>
           <dl>
             <dt>Preprint research (SSRN)</dt>
             <dd>
@@ -1763,9 +1828,23 @@
           <p>Reach out for collaborations, internships, or speaking opportunities.</p>
         </div>
         <div class="contact-grid">
-          <form class="contact-form" id="contact-form" action="#" method="post">
+          <form
+            class="contact-form"
+            id="contact-form"
+            action="https://formsubmit.co/anshikashukla0322@gmail.com"
+            method="POST"
+            target="contact-submit-frame"
+          >
             <label for="c-name">Name</label>
-            <input id="c-name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+            <input
+              id="c-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              placeholder="Your name"
+            />
+
             <label for="c-email">Email</label>
             <input
               id="c-email"
@@ -1775,11 +1854,68 @@
               required
               placeholder="you@example.com"
             />
+
+            <input type="hidden" name="_replyto" id="contact-replyto" value="" />
+
             <label for="c-msg">Message</label>
-            <textarea id="c-msg" name="message" required placeholder="How can we work together?"></textarea>
-            <button type="submit" class="btn btn-primary">Send Message</button>
-            <p class="form-success" id="form-success" role="status">Thanks — your message is ready to send via email.</p>
+            <textarea
+              id="c-msg"
+              name="message"
+              required
+              placeholder="How can we work together?"
+            ></textarea>
+
+            <input
+              type="text"
+              name="_honey"
+              class="contact-honeypot"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
+            <input
+              type="hidden"
+              name="_subject"
+              value="Portfolio Contact — Anshika Shukla"
+            />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="contact-submit"
+            >
+              Send Message
+            </button>
+
+            <p
+              class="form-success"
+              id="form-success"
+              role="status"
+              aria-live="polite"
+            >
+              ✓ Message sent successfully! I'll get back to you soon.
+            </p>
+
+            <p
+              class="form-error"
+              id="form-error"
+              role="alert"
+              aria-live="assertive"
+            >
+              Couldn't send the message. Please try again or
+              <a href="mailto:anshikashukla0322@gmail.com">email me directly</a>.
+            </p>
           </form>
+          <iframe
+            name="contact-submit-frame"
+            id="contact-submit-frame"
+            title="Contact form submission"
+            aria-hidden="true"
+            style="display:none;"
+          ></iframe>
           <div>
             <p style="margin-top: 0; color: var(--color-body)">
               <strong>Email:</strong>
@@ -1985,16 +2121,65 @@
           });
         }
 
-        var form = document.getElementById("contact-form");
-        var ok = document.getElementById("form-success");
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          var data = new FormData(form);
-          var subject = encodeURIComponent("Portfolio contact from " + (data.get("name") || "visitor"));
-          var body = encodeURIComponent((data.get("message") || "") + "\n\n—\n" + (data.get("email") || ""));
-          window.location.href = "mailto:anshikashukla0322@gmail.com?subject=" + subject + "&body=" + body;
-          ok.classList.add("show");
-        });
+        // ===============================
+        // CONTACT FORM — NATIVE FORMSUBMIT
+        // ===============================
+        // Native POST is used instead of fetch/AJAX so the browser can submit
+        // directly to FormSubmit without a CORS/JSON response dependency.
+        // The response is loaded into a hidden iframe, so the visitor stays here.
+
+        (function () {
+          var contactForm = document.getElementById("contact-form");
+          var contactFrame = document.getElementById("contact-submit-frame");
+          var successMessage = document.getElementById("form-success");
+          var errorMessage = document.getElementById("form-error");
+          var contactButton = document.getElementById("contact-submit");
+          var waitingForResponse = false;
+          var initialFrameLoad = true;
+          var timeoutId = null;
+
+          if (!contactForm || !contactFrame) return;
+
+          contactFrame.addEventListener("load", function () {
+            if (initialFrameLoad) {
+              initialFrameLoad = false;
+              return;
+            }
+
+            if (!waitingForResponse) return;
+
+            waitingForResponse = false;
+            window.clearTimeout(timeoutId);
+            contactButton.disabled = false;
+            contactButton.textContent = "Send Message";
+            contactForm.reset();
+            successMessage.classList.add("show");
+
+            window.setTimeout(function () {
+              successMessage.classList.remove("show");
+            }, 7000);
+          });
+
+          contactForm.addEventListener("submit", function () {
+            // Put the visitor's email into FormSubmit's Reply-To field.
+            contactForm.elements._replyto.value =
+              contactForm.elements.email.value.trim();
+
+            successMessage.classList.remove("show");
+            errorMessage.classList.remove("show");
+            waitingForResponse = true;
+            contactButton.disabled = true;
+            contactButton.textContent = "Sending…";
+
+            timeoutId = window.setTimeout(function () {
+              if (!waitingForResponse) return;
+              waitingForResponse = false;
+              contactButton.disabled = false;
+              contactButton.textContent = "Send Message";
+              errorMessage.classList.add("show");
+            }, 15000);
+          });
+        })();
       })();
     </script>
   </body>
