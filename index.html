@@ -836,6 +836,14 @@
         transition-delay: 0.45s;
       }
 
+      .reveal.visible .project-card:nth-child(10) {
+        transition-delay: 0.5s;
+      }
+
+      .reveal.visible .project-card:nth-child(11) {
+        transition-delay: 0.55s;
+      }
+
       .project-card.featured {
         border-top: 2px solid rgba(201, 168, 76, 0.45);
       }
@@ -1397,6 +1405,8 @@
             <span class="pill">CNNs</span>
             <span class="pill">Feature Engineering</span>
             <span class="pill">MLOps</span>
+            <span class="pill">CI/CD</span>
+            <span class="pill">INT8 / INT4 Quantization</span>
             <span class="pill">IoT Systems</span>
             <span class="pill">Real-Time Detection</span>
             <span class="pill">Prompt Engineering</span>
@@ -1418,6 +1428,8 @@
             <span class="pill">Python</span>
             <span class="pill">C / C++</span>
             <span class="pill">JavaScript</span>
+            <span class="pill">Bash</span>
+            <span class="pill">SystemVerilog</span>
             <span class="pill">MATLAB</span>
             <span class="pill">SQL</span>
             <span class="pill">HTML5 / CSS3</span>
@@ -1449,7 +1461,19 @@
             <span class="pill">MQTT</span>
             <span class="pill">WebSockets</span>
             <span class="pill">YOLO Detection</span>
+            <span class="pill">Icarus Verilog</span>
+            <span class="pill">RTL Simulation</span>
             <span class="pill">Embedded Sensors &amp; Modules</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="pills">
+            <span class="pill">GitHub Actions</span>
+            <span class="pill">Amazon S3</span>
+            <span class="pill">AWS IAM</span>
+            <span class="pill">OIDC</span>
+            <span class="pill">AWS STS</span>
           </div>
         </div>
         <div class="skill-group">
@@ -1513,6 +1537,55 @@
           <p>Newest first — hardware, vision, and full-stack ML.</p>
         </div>
         <div class="project-grid">
+          <article class="project-card featured">
+            <span class="date">Oct 2026</span>
+            <h3>AWS CI/CD Pipeline — GitHub Actions to Amazon S3</h3>
+            <p>
+              Automated deployment pipeline that syncs a static site to Amazon S3 on every push to
+              <code>main</code>. Replaced long-lived access keys with GitHub OIDC and temporary STS
+              credentials, assuming an IAM role scoped by a least-privilege policy to a single S3 bucket.
+              Bucket is private with versioning, SSE-S3 encryption, and Block Public Access enabled.
+            </p>
+            <div class="pills">
+              <span class="pill tech">GitHub Actions</span>
+              <span class="pill tech">AWS IAM</span>
+              <span class="pill tech">OIDC</span>
+              <span class="pill tech">Amazon S3</span>
+              <span class="pill tech">AWS STS</span>
+              <span class="pill tech">Bash</span>
+            </div>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/aws-cicd-project"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
+          </article>
+          <article class="project-card featured">
+            <span class="date">Sept 2026</span>
+            <h3>Hardware-Aware Mixed-Precision Quantization for Edge Neural Audio</h3>
+            <p>
+              Designed and verified SystemVerilog RTL for edge inference (INT8 MAC unit, Conv1D blocks,
+              32-channel Conv2 engine), validating all 16,256 outputs in simulation. PyTorch pipeline
+              analyzes per-layer MAC cost, memory footprint, and quantization noise across FP32/INT8/INT4
+              (INT8 SNR: 44.20&nbsp;dB, INT4: 19.45&nbsp;dB).
+            </p>
+            <div class="pills">
+              <span class="pill tech">SystemVerilog</span>
+              <span class="pill tech">Icarus Verilog</span>
+              <span class="pill tech">PyTorch</span>
+              <span class="pill tech">RTL Simulation</span>
+              <span class="pill tech">INT8 / INT4</span>
+            </div>
+            <a
+              class="btn-project"
+              href="https://github.com/Anshika032/hardware-aware-audio/tree/main"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View on GitHub <span class="arrow" aria-hidden="true">→</span></a
+            >
+          </article>
           <article class="project-card featured">
             <span class="date">June 2026</span>
             <h3>PitWall — F1 Race Intelligence Platform</h3>
